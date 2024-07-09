@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.standardclonui"
+    namespace = "com.example.standardcloneui"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.standardclonui"
+        applicationId = "com.example.standardcloneui"
         minSdk = 30
         targetSdk = 34
         versionCode = 1
@@ -33,6 +33,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    viewBinding {
+        enable = true
     }
 }
 
