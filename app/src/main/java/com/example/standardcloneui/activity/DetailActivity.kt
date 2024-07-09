@@ -1,4 +1,4 @@
-package com.example.standardclonui.activity
+package com.example.standardcloneui.activity
 
 import android.os.Build
 import android.os.Bundle
@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.standardclonui.R
 
-import com.example.standardclonui.data.Video
-import com.example.standardclonui.data.VideoList
+import com.example.standardcloneui.data.Video
+import com.example.standardcloneui.data.VideoList
 
 const val EXTRA_VIDEO = "EXTRA_VIDEO"
 

@@ -1,4 +1,4 @@
-package com.example.standardclonui.activity
+package com.example.standardcloneui.activity
 
 import android.Manifest
 import android.content.Intent
@@ -22,9 +22,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.standardclonui.R
-import com.example.standardclonui.data.Video
-import com.example.standardclonui.data.VideoList
-import com.example.standardsample2.activity.SettingActivity
+import com.example.standardcloneui.data.Video
+import com.example.standardcloneui.data.VideoList
 
 private const val LIFECYCLE_TAG = "MainActivity.LifeCycle"
 class MainActivity : AppCompatActivity() {

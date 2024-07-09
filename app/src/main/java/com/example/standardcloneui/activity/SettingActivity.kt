@@ -1,10 +1,7 @@
-package com.example.standardsample2.activity
+package com.example.standardcloneui.activity
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -12,7 +9,6 @@ import android.widget.ImageView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import com.example.standardclonui.R
 
 private const val TAG = "SettingActivity.LifeCycle"

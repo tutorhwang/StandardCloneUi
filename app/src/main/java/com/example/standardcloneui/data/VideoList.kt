@@ -1,4 +1,4 @@
-package com.example.standardclonui.data
+package com.example.standardcloneui.data
 
 import android.net.Uri
 
