@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:attr/colorControlHighlight"> <!-- 리플 색상 -->
+
+    <item>
+        <shape android:shape="rectangle"> <!-- 라운드 코너 정의 -->
+            <solid android:color="#FFFFFF"/> <!-- 배경색 -->
+            <corners android:radius="25dp"/> <!-- 코너 라운드 정도 -->
+        </shape>
+    </item>
+</ripple>
