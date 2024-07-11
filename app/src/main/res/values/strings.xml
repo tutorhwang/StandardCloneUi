@@ -6,4 +6,7 @@
     <string name="action_toggle_theme">Toggle Theme</string>
     <string name="android_tutor">Android Tutor</string>
     <string name="hwang_seong_hee">HWANG SEONG HEE</string>
+    <string name="action_add">add</string>
+    <string name="action_remove">remove</string>
+    <string name="detail">Detail</string>
 </resources>

@@ -3,7 +3,9 @@ package com.example.standardcloneui.data
 import android.net.Uri
 
 object VideoList {
-    private val list: MutableList<Video> = mutableListOf()
+    private val _list: MutableList<Video> = mutableListOf()
+    val list: List<Video>
+        get() = _list
     var imageUri: Uri? = null
 
     init {
@@ -54,11 +56,15 @@ object VideoList {
     }
 
     fun add(video: Video) {
-        list.add(video)
+        _list.add(video)
     }
 
-    fun remove(video: Video) {
-        list.remove(video)
+    fun addFirst(video: Video) {
+        _list.add(0, video)
+    }
+
+    fun removeAt(position: Int) {
+        _list.removeAt(position)
     }
 
     fun find(channelTitle: String): Video? {

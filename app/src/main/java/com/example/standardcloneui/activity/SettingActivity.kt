@@ -9,7 +9,7 @@ import android.widget.ImageView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.standardclonui.R
+import com.example.standardcloneui.R
 
 private const val TAG = "SettingActivity.LifeCycle"
 

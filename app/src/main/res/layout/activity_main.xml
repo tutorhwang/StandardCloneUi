@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -80,38 +81,15 @@
 
     </com.google.android.material.chip.ChipGroup>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/video_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chip_group">
+        app:layout_constraintTop_toBottomOf="@id/chip_group"
+        tools:listitem="@layout/item_layout"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include
-                android:id="@+id/video_1"
-                layout="@layout/item_layout" />
-
-            <include
-                android:id="@+id/video_2"
-                layout="@layout/item_layout" />
-
-            <include
-                android:id="@+id/video_3"
-                layout="@layout/item_layout" />
-
-            <include
-                android:id="@+id/video_4"
-                layout="@layout/item_layout" />
-
-            <include
-                android:id="@+id/video_5"
-                layout="@layout/item_layout" />
-        </LinearLayout>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
