@@ -3,19 +3,15 @@ package com.example.standardcloneui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.standardcloneui.adapter.VideoListAdapter
-import com.example.standardcloneui.data.Video
-import com.example.standardcloneui.data.VideoList
 import com.example.standardcloneui.R
-import com.example.standardcloneui.adapter.ImagePagerAdapter
+import com.example.standardcloneui.adapter.ListItem
+import com.example.standardcloneui.adapter.VideoListAdapter
+import com.example.standardcloneui.data.VideoList
 import com.example.standardcloneui.databinding.ActivityMainBinding
-import com.google.android.material.tabs.TabLayoutMediator
 
 private const val LIFECYCLE_TAG = "MainActivity.LifeCycle"
 
@@ -44,26 +40,26 @@ class MainActivity : AppCompatActivity() {
 
         with(binding) {
             setSupportActionBar(toolbar)
-            with(binding.videoList) {
-                adapter = videoAdapter.apply { submitList(VideoList.list.toList()) }
-                chipInsert.setOnClickListener {
-                    VideoList.addFirst(
-                        Video(
-                            "Bùm", //channel title
-                            "Phân Tích Bí Ẩn Skibidi Toilet 69 Tập Full", // title
-                            "https://i.ytimg.com/vi/dyuFvdd1Le4/mqdefault.jpg", //thumbnails.medium
-                            "Phân Tích Bí Ẩn Skibidi Toilet 69 Tập Full --- Shopacc: https://bumroblox.net/k1 Kênh Phụ: ..." //description
-                        )
-                    )
-                    videoAdapter.submitList(VideoList.list.toList()) { scrollToPosition(0) }
-                }
+            val list = binding.videoList
+            list.adapter = videoAdapter.apply { submitList(VideoList.list.toList()) }
 
-                chipDelete.setOnClickListener {
-                    if (VideoList.list.isNotEmpty()) {
-                        VideoList.removeLast()
-                        videoAdapter.submitList(VideoList.list.toList()) {
-                            scrollToPosition(0)
-                        }
+            chipInsert.setOnClickListener {
+                VideoList.addFirst(
+                    ListItem.VideoItem(
+                        "Bùm", //channel title
+                        "Phân Tích Bí Ẩn Skibidi Toilet 69 Tập Full", // title
+                        "https://i.ytimg.com/vi/dyuFvdd1Le4/mqdefault.jpg", //thumbnails.medium
+                        "Phân Tích Bí Ẩn Skibidi Toilet 69 Tập Full --- Shopacc: https://bumroblox.net/k1 Kênh Phụ: ..." //description
+                    )
+                )
+                videoAdapter.submitList(VideoList.list.toList()) { list.scrollToPosition(0) }
+            }
+
+            chipDelete.setOnClickListener {
+                if (VideoList.list.isNotEmpty()) {
+                    VideoList.removeLast()
+                    videoAdapter.submitList(VideoList.list.toList()) {
+                        list.scrollToPosition(0)
                     }
                 }
             }

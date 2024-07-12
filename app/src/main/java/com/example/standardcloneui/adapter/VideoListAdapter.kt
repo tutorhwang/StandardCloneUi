@@ -1,5 +1,6 @@
 package com.example.standardcloneui.adapter
 
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,31 +8,83 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.standardcloneui.data.Video
 import com.example.standardcloneui.R
 import com.example.standardcloneui.databinding.ItemLayoutBinding
+import com.example.standardcloneui.databinding.ItemLayoutHeaderBinding
+import kotlinx.parcelize.Parcelize
 
-class VideoListAdapter(private val onClick: (Video) -> Unit) :
-    ListAdapter<Video, VideoListAdapter.VideoItemHolder>(object : DiffUtil.ItemCallback<Video>() {
-        override fun areItemsTheSame(oldItem: Video, newItem: Video): Boolean {
-            return oldItem.title == newItem.title
+sealed class ListItem : Parcelable {
+    @Parcelize
+    data class HeaderItem(val thumbnail: String) : ListItem()
+
+    @Parcelize
+    data class VideoItem(
+        val channelTitle: String,
+        val title: String,
+        val thumbnail: String,
+        val description: String
+    ) : ListItem()
+}
+
+class VideoListAdapter(private val onClick: (ListItem) -> Unit) :
+    ListAdapter<ListItem, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<ListItem>() {
+        override fun areItemsTheSame(oldItem: ListItem, newItem: ListItem): Boolean {
+            return when {
+                oldItem is ListItem.HeaderItem && newItem is ListItem.HeaderItem ->
+                    oldItem.thumbnail == newItem.thumbnail
+
+                oldItem is ListItem.VideoItem && newItem is ListItem.VideoItem ->
+                    oldItem.title == newItem.title
+
+                else -> false
+            }
         }
 
-        override fun areContentsTheSame(oldItem: Video, newItem: Video): Boolean {
+        override fun areContentsTheSame(oldItem: ListItem, newItem: ListItem): Boolean {
             return oldItem == newItem
         }
     }) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoItemHolder {
-        val binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return VideoItemHolder(binding)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            TYPE_HEADER -> {
+                val binding =
+                    ItemLayoutHeaderBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                HeaderItemHolder(binding)
+            }
+
+            else -> {
+                val binding =
+                    ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                VideoItemHolder(binding)
+            }
+        }
     }
 
-    override fun onBindViewHolder(itemHolder: VideoItemHolder, position: Int) {
+    override fun onBindViewHolder(itemHolder: RecyclerView.ViewHolder, position: Int) {
         runCatching {
-            itemHolder.bind(getItem(position))
-            itemHolder.positionView.text = position.toString()
+            when (val item = getItem(position)) {
+                is ListItem.HeaderItem -> {
+                    (itemHolder as HeaderItemHolder).bind(item)
+                }
+
+                is ListItem.VideoItem -> {
+                    (itemHolder as VideoItemHolder).bind(item)
+                }
+            }
         }.onFailure { exception ->
             Log.e("VideoListAdapter", "Exception! ${exception.message}")
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is ListItem.HeaderItem -> TYPE_HEADER
+            is ListItem.VideoItem -> TYPE_CONTENT
         }
     }
 
@@ -41,17 +94,31 @@ class VideoListAdapter(private val onClick: (Video) -> Unit) :
         private val channelNameView = binding.channelName
         private val titleView = binding.title
         private val thumbnailView = binding.mainImage
-        val positionView = binding.position
 
-        fun bind(video: Video) {
+        fun bind(video: ListItem.VideoItem) {
             with(video) {
-                Log.d("RecyclerView", "bind $video")
                 Glide.with(itemView).load(thumbnail).into(thumbnailView)
-                thumbnailView.setOnClickListener { onClick(this) }
                 titleView.text = title
                 channelNameView.text = channelTitle
                 channelLogoView.setImageResource(R.drawable.haelin)
+                thumbnailView.setOnClickListener { onClick(this) }
             }
         }
+    }
+
+    inner class HeaderItemHolder(binding: ItemLayoutHeaderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        private val thumbnailView = binding.mainImage
+
+        fun bind(item: ListItem.HeaderItem) {
+            with(item) {
+                Glide.with(itemView).load(thumbnail).into(thumbnailView)
+            }
+        }
+    }
+
+    companion object {
+        private const val TYPE_HEADER = 0
+        private const val TYPE_CONTENT = 1
     }
 }
