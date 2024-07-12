@@ -67,6 +67,10 @@ object VideoList {
         _list.removeAt(position)
     }
 
+    fun removeLast() {
+        _list.removeAt(_list.size -1)
+    }
+
     fun find(channelTitle: String): Video? {
         return list.find { it.channelTitle == channelTitle }
     }
