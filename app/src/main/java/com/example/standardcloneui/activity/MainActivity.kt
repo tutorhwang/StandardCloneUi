@@ -6,18 +6,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import com.example.standardcloneui.R
+import com.example.standardcloneui.adapter.ViewPagerAdapter
 import com.example.standardcloneui.databinding.ActivityMainBinding
-import com.example.standardcloneui.fragment.HomeFragment
-import com.example.standardcloneui.fragment.MyPageFragment
-import com.example.standardcloneui.fragment.VideoListFragment
+import com.google.android.material.tabs.TabLayoutMediator
 
 private const val LIFECYCLE_TAG = "MainActivity.LifeCycle"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    private val tabTitles =
+        listOf(R.string.title_home, R.string.title_video_list, R.string.title_my_page)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,25 +29,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         Log.i(LIFECYCLE_TAG, "onCreate()")
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_home -> {
-                    HomeFragment().loadFragment()
-                    true
-                }
-
-                R.id.navigation_video_list -> {
-                    VideoListFragment().loadFragment()
-                    true
-                }
-
-                R.id.navigation_my_page -> {
-                    MyPageFragment().loadFragment()
-                    true
-                }
-
-                else -> false
-            }
+        with(binding) {
+            viewPager.adapter = ViewPagerAdapter(this@MainActivity)
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.text = getString(tabTitles[position])
+            }.attach()
         }
     }
 
@@ -79,13 +65,5 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.i(LIFECYCLE_TAG, "onDestroy()")
-    }
-
-    private fun Fragment.loadFragment() {
-        supportFragmentManager.commit {
-            replace(R.id.fragment_container, this@loadFragment)
-            setReorderingAllowed(true)
-            addToBackStack(null)
-        }
     }
 }
