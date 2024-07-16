@@ -1,31 +1,23 @@
 package com.example.standardcloneui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.example.standardcloneui.R
-import com.example.standardcloneui.adapter.ListItem
-import com.example.standardcloneui.adapter.VideoListAdapter
-import com.example.standardcloneui.data.VideoList
 import com.example.standardcloneui.databinding.ActivityMainBinding
+import com.example.standardcloneui.fragment.HomeFragment
+import com.example.standardcloneui.fragment.MyPageFragment
+import com.example.standardcloneui.fragment.VideoListFragment
 
 private const val LIFECYCLE_TAG = "MainActivity.LifeCycle"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val videoAdapter by lazy {
-        VideoListAdapter() { video ->
-            val intent = Intent(applicationContext, DetailActivity::class.java).apply {
-                putExtra(EXTRA_VIDEO, video)
-            }
-            startActivity(intent)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,39 +29,26 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         Log.i(LIFECYCLE_TAG, "onCreate()")
-
-        with(binding) {
-            setSupportActionBar(toolbar)
-            val list = binding.videoList
-            list.adapter = videoAdapter.apply { submitList(VideoList.list.toList()) }
-
-            chipInsert.setOnClickListener {
-                VideoList.addFirst(
-                    ListItem.VideoItem(
-                        "Bùm", //channel title
-                        "Phân Tích Bí Ẩn Skibidi Toilet 69 Tập Full", // title
-                        "https://i.ytimg.com/vi/dyuFvdd1Le4/mqdefault.jpg", //thumbnails.medium
-                        "Phân Tích Bí Ẩn Skibidi Toilet 69 Tập Full --- Shopacc: https://bumroblox.net/k1 Kênh Phụ: ..." //description
-                    )
-                )
-                videoAdapter.submitList(VideoList.list.toList()) { list.scrollToPosition(0) }
-            }
-
-            chipDelete.setOnClickListener {
-                if (VideoList.list.isNotEmpty()) {
-                    VideoList.removeLast()
-                    videoAdapter.submitList(VideoList.list.toList()) {
-                        list.scrollToPosition(0)
-                    }
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    HomeFragment().loadFragment()
+                    true
                 }
+
+                R.id.navigation_video_list -> {
+                    VideoListFragment().loadFragment()
+                    true
+                }
+
+                R.id.navigation_my_page -> {
+                    MyPageFragment().loadFragment()
+                    true
+                }
+
+                else -> false
             }
-
-//            viewPager.adapter = ImagePagerAdapter(VideoList.list)
-//            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-//                tab.text = VideoList.list[position].title
-//            }.attach()
         }
-
     }
 
     override fun onStart() {
@@ -100,5 +79,13 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.i(LIFECYCLE_TAG, "onDestroy()")
+    }
+
+    private fun Fragment.loadFragment() {
+        supportFragmentManager.commit {
+            replace(R.id.fragment_container, this@loadFragment)
+            setReorderingAllowed(true)
+            addToBackStack(null)
+        }
     }
 }

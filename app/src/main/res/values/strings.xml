@@ -10,6 +10,6 @@
     <string name="action_remove">remove</string>
     <string name="detail">Detail</string>
     <string name="title_home">Home</string>
-    <string name="title_search">search</string>
-    <string name="title_settings">setting</string>
+    <string name="title_video_list">List</string>
+    <string name="title_my_page">My Page</string>
 </resources>
