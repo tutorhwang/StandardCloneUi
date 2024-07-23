@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import com.bumptech.glide.Glide
 import com.example.standardcloneui.activity.MainActivity
 import com.example.standardcloneui.data.ListItem
@@ -36,11 +38,18 @@ class DetailFragment : Fragment() {
             Glide.with(this).load(it.thumbnail).into(binding.picture)
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                (activity as? MainActivity)?.hideDetailFragment()
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    setFragmentResult(KEY_RESULT, bundleOf(KEY_RESULT to "Detail Finished"))
+                    (activity as? MainActivity)?.hideDetailFragment()
+                }
+            })
+
+        binding.picture.setOnClickListener {
+            setFragmentResult(KEY_FRAGMENT_RESULT, bundleOf(KEY_FRAGMENT_RESULT to "Favorite Clicked"))
+        }
     }
 
     override fun onDestroyView() {
@@ -50,12 +59,12 @@ class DetailFragment : Fragment() {
 
     companion object {
         private const val ARG_VIDEO = "ARG_VIDEO"
+        const val KEY_RESULT = "KEY_RESULT"
+        const val KEY_FRAGMENT_RESULT = "KEY_FRAGMENT_RESULT"
 
         @JvmStatic
         fun newInstance(video: ListItem.VideoItem) = DetailFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(ARG_VIDEO, video)
-            }
+            arguments = bundleOf(ARG_VIDEO to video)
         }
     }
 }

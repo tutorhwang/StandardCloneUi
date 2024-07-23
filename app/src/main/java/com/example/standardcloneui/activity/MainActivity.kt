@@ -3,6 +3,7 @@ package com.example.standardcloneui.activity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -38,6 +39,13 @@ class MainActivity : AppCompatActivity() {
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = getString(tabTitles[position])
             }.attach()
+        }
+        supportFragmentManager.setFragmentResultListener(
+            DetailFragment.KEY_RESULT,
+            this
+        ) { key, bundle ->
+            val result = bundle.getString(key)
+            Toast.makeText(this, "Fragment result: $result", Toast.LENGTH_SHORT).show()
         }
     }
 

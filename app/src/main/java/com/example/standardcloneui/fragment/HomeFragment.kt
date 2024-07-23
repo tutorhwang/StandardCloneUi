@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.standardcloneui.activity.MainActivity
 import com.example.standardcloneui.data.ListItem
@@ -55,6 +56,10 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
+        }
+        parentFragmentManager.setFragmentResultListener(DetailFragment.KEY_FRAGMENT_RESULT, viewLifecycleOwner) { key, bundle ->
+            val result = bundle.getString(DetailFragment.KEY_FRAGMENT_RESULT)
+            Toast.makeText(requireContext(), "Fragment result: $result", Toast.LENGTH_SHORT).show()
         }
     }
 
