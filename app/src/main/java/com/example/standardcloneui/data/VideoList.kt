@@ -1,7 +1,6 @@
 package com.example.standardcloneui.data
 
 import android.net.Uri
-import com.example.standardcloneui.adapter.ListItem
 
 object VideoList {
     private val _list: MutableList<ListItem> = mutableListOf()

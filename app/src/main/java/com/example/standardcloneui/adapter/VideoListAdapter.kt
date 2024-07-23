@@ -1,6 +1,5 @@
 package com.example.standardcloneui.adapter
 
-import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,22 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.standardcloneui.R
+import com.example.standardcloneui.data.ListItem
 import com.example.standardcloneui.databinding.ItemLayoutBinding
 import com.example.standardcloneui.databinding.ItemLayoutHeaderBinding
-import kotlinx.parcelize.Parcelize
-
-sealed class ListItem : Parcelable {
-    @Parcelize
-    data class HeaderItem(val thumbnail: String) : ListItem()
-
-    @Parcelize
-    data class VideoItem(
-        val channelTitle: String,
-        val title: String,
-        val thumbnail: String,
-        val description: String
-    ) : ListItem()
-}
 
 class VideoListAdapter(private val onClick: (ListItem) -> Unit) :
     ListAdapter<ListItem, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<ListItem>() {

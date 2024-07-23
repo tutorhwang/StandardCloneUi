@@ -2,11 +2,13 @@ package com.example.standardcloneui.activity
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.standardcloneui.R
+import com.example.standardcloneui.data.ListItem
 import com.example.standardcloneui.adapter.ViewPagerAdapter
 import com.example.standardcloneui.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private val tabTitles =
         listOf(R.string.title_home, R.string.title_video_list, R.string.title_my_page)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -65,5 +68,26 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.i(LIFECYCLE_TAG, "onDestroy()")
+    }
+
+    fun showDetailFragment(item: ListItem.VideoItem) {
+        val fragment = DetailFragment.newInstance(item)
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right,
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right
+            )
+            .replace(R.id.detail_fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+
+        binding.detailFragmentContainer.visibility = View.VISIBLE
+    }
+
+    fun hideDetailFragment() {
+        supportFragmentManager.popBackStack()
+        binding.detailFragmentContainer.visibility = View.GONE
     }
 }
