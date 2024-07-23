@@ -11,6 +11,7 @@ import com.example.standardcloneui.R
 import com.example.standardcloneui.data.ListItem
 import com.example.standardcloneui.adapter.ViewPagerAdapter
 import com.example.standardcloneui.databinding.ActivityMainBinding
+import com.example.standardcloneui.fragment.DetailFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 private const val LIFECYCLE_TAG = "MainActivity.LifeCycle"
