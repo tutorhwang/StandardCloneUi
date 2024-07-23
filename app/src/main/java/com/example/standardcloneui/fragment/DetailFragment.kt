@@ -1,4 +1,4 @@
-package com.example.standardcloneui.activity
+package com.example.standardcloneui.fragment
 
 import android.os.Build
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.standardcloneui.activity.MainActivity
 import com.example.standardcloneui.data.ListItem
 import com.example.standardcloneui.databinding.FragmentDetailBinding
 
