@@ -1,4 +1,4 @@
-package com.example.standardcloneui.data
+package com.example.standardcloneui.presentation
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

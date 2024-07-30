@@ -1,6 +1,6 @@
-package com.example.standardcloneui.repository
+package com.example.standardcloneui.data.repository
 
-import com.example.standardcloneui.data.ListItem
+import com.example.standardcloneui.presentation.ListItem
 
 class FavoriteRepository {
     private val _favoriteItems = mutableListOf<ListItem.VideoItem>()

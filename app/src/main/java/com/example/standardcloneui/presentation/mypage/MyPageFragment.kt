@@ -1,4 +1,4 @@
-package com.example.standardcloneui.fragment
+package com.example.standardcloneui.presentation.mypage
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,11 +8,17 @@ import android.view.ViewGroup
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.example.standardcloneui.presentation.favorite.FavoriteListAdapter
 import com.example.standardcloneui.databinding.FragmentMyPageBinding
+import com.example.standardcloneui.presentation.main.MainViewModel
 
 class MyPageFragment : Fragment() {
     private var _binding: FragmentMyPageBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel by activityViewModels<MainViewModel>()
+    private val adapter by lazy { FavoriteListAdapter { viewModel.removeFavoriteItem(it) } }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,8 +32,14 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.pickButton.setOnClickListener { openGalleryForImage() }
+        binding.recyclerView.adapter = adapter
+        initViewModel()
     }
-
+    private fun initViewModel() = with(viewModel) {
+        favoriteList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

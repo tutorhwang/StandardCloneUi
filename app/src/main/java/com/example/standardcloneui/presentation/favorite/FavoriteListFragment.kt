@@ -1,4 +1,4 @@
-package com.example.standardcloneui.fragment
+package com.example.standardcloneui.presentation.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.standardcloneui.adapter.FavoriteListAdapter
 import com.example.standardcloneui.databinding.FragmentVideoListBinding
-import com.example.standardcloneui.viewmodel.MainViewModel
+import com.example.standardcloneui.presentation.main.MainViewModel
 
 class FavoriteListFragment : Fragment() {
 

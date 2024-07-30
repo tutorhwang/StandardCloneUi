@@ -1,4 +1,4 @@
-package com.example.standardcloneui.fragment
+package com.example.standardcloneui.presentation.detail
 
 import android.os.Build
 import android.os.Bundle
@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import com.bumptech.glide.Glide
-import com.example.standardcloneui.activity.MainActivity
-import com.example.standardcloneui.data.ListItem
+import com.example.standardcloneui.presentation.main.MainActivity
+import com.example.standardcloneui.presentation.ListItem
 import com.example.standardcloneui.databinding.FragmentDetailBinding
-import com.example.standardcloneui.viewmodel.MainViewModel
+import com.example.standardcloneui.presentation.main.MainViewModel
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null

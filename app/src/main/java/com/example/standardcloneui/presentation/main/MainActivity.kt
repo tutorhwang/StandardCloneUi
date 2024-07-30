@@ -1,4 +1,4 @@
-package com.example.standardcloneui.activity
+package com.example.standardcloneui.presentation.main
 
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.standardcloneui.R
-import com.example.standardcloneui.data.ListItem
-import com.example.standardcloneui.adapter.ViewPagerAdapter
+import com.example.standardcloneui.presentation.ListItem
 import com.example.standardcloneui.databinding.ActivityMainBinding
-import com.example.standardcloneui.fragment.DetailFragment
+import com.example.standardcloneui.presentation.detail.DetailFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 private const val LIFECYCLE_TAG = "MainActivity.LifeCycle"
@@ -20,7 +19,7 @@ private const val LIFECYCLE_TAG = "MainActivity.LifeCycle"
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val tabTitles =
+    val tabTitles =
         listOf(R.string.title_home, R.string.title_video_list, R.string.title_my_page)
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.example.standardcloneui.fragment
+package com.example.standardcloneui.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.standardcloneui.activity.MainActivity
-import com.example.standardcloneui.data.ListItem
-import com.example.standardcloneui.adapter.VideoListAdapter
-import com.example.standardcloneui.data.VideoList
+import com.example.standardcloneui.presentation.main.MainActivity
+import com.example.standardcloneui.presentation.ListItem
+import com.example.standardcloneui.presentation.VideoList
 import com.example.standardcloneui.databinding.FragmentHomeBinding
+import com.example.standardcloneui.presentation.detail.DetailFragment
 
 class HomeFragment : Fragment() {
 

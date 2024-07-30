@@ -1,4 +1,4 @@
-package com.example.standardcloneui.adapter
+package com.example.standardcloneui.presentation.favorite
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.standardcloneui.R
-import com.example.standardcloneui.data.ListItem
+import com.example.standardcloneui.presentation.ListItem
 import com.example.standardcloneui.databinding.ItemLayoutBinding
 
 class FavoriteListAdapter(private val onClick: (ListItem.VideoItem) -> Unit) :
