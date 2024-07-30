@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.standardcloneui.presentation.ListItem
 import com.example.standardcloneui.data.repository.FavoriteRepository
 
-class MainViewModel(private val repository: FavoriteRepository = FavoriteRepository()) : ViewModel() {
+class FavoriteViewModel(private val repository: FavoriteRepository) : ViewModel() {
     private val _favoriteList: MutableLiveData<List<ListItem.VideoItem>> = MutableLiveData()
     val favoriteList: LiveData<List<ListItem.VideoItem>> = _favoriteList
 

@@ -13,13 +13,16 @@ import com.bumptech.glide.Glide
 import com.example.standardcloneui.databinding.FragmentDetailBinding
 import com.example.standardcloneui.presentation.ListItem
 import com.example.standardcloneui.presentation.main.MainActivity
-import com.example.standardcloneui.presentation.main.MainViewModel
+import com.example.standardcloneui.presentation.main.FavoriteViewModel
+import com.example.standardcloneui.presentation.main.FavoriteViewModelFactory
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: FavoriteViewModel by activityViewModels {
+        FavoriteViewModelFactory(requireContext())
+    }
 
-    private val viewModel by activityViewModels<MainViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

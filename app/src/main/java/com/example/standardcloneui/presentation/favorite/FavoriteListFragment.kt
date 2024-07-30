@@ -7,14 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.standardcloneui.databinding.FragmentVideoListBinding
-import com.example.standardcloneui.presentation.main.MainViewModel
+import com.example.standardcloneui.presentation.main.FavoriteViewModel
+import com.example.standardcloneui.presentation.main.FavoriteViewModelFactory
 
 class FavoriteListFragment : Fragment() {
 
     private var _binding: FragmentVideoListBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by activityViewModels<MainViewModel>()
+    private val viewModel: FavoriteViewModel by activityViewModels {
+        FavoriteViewModelFactory(requireContext())
+    }
     private val adapter by lazy { FavoriteListAdapter { viewModel.removeFavoriteItem(it) } }
 
     override fun onCreateView(
