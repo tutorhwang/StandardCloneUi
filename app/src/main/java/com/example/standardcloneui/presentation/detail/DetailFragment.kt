@@ -9,11 +9,10 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResult
 import com.bumptech.glide.Glide
-import com.example.standardcloneui.presentation.main.MainActivity
-import com.example.standardcloneui.presentation.ListItem
 import com.example.standardcloneui.databinding.FragmentDetailBinding
+import com.example.standardcloneui.presentation.ListItem
+import com.example.standardcloneui.presentation.main.MainActivity
 import com.example.standardcloneui.presentation.main.MainViewModel
 
 class DetailFragment : Fragment() {
@@ -46,13 +45,11 @@ class DetailFragment : Fragment() {
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    setFragmentResult(KEY_RESULT, bundleOf(KEY_RESULT to "Detail Finished"))
                     (activity as? MainActivity)?.hideDetailFragment()
                 }
             })
 
         binding.picture.setOnClickListener {
-            //setFragmentResult(KEY_FRAGMENT_RESULT, bundleOf(KEY_FRAGMENT_RESULT to "Favorite Clicked"))
             item?.let { viewModel.addFavoriteItem(it) }
         }
     }
@@ -64,8 +61,6 @@ class DetailFragment : Fragment() {
 
     companion object {
         private const val ARG_VIDEO = "ARG_VIDEO"
-        const val KEY_RESULT = "KEY_RESULT"
-        const val KEY_FRAGMENT_RESULT = "KEY_FRAGMENT_RESULT"
 
         @JvmStatic
         fun newInstance(video: ListItem.VideoItem) = DetailFragment().apply {

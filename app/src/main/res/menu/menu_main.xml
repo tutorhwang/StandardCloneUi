@@ -4,12 +4,12 @@
     <item
         android:id="@+id/action_add"
         android:orderInCategory="100"
-        android:title="@string/action_add"
+        android:title="@string/action_kr"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_remove"
         android:orderInCategory="100"
-        android:title="@string/action_remove"
+        android:title="@string/action_us"
         app:showAsAction="never" />
 </menu>

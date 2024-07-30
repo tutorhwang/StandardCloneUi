@@ -6,8 +6,8 @@
     <string name="action_toggle_theme">Toggle Theme</string>
     <string name="android_tutor">Android Tutor</string>
     <string name="hwang_seong_hee">HWANG SEONG HEE</string>
-    <string name="action_add">add</string>
-    <string name="action_remove">remove</string>
+    <string name="action_kr">한국</string>
+    <string name="action_us">America</string>
     <string name="detail">Detail</string>
     <string name="title_home">Home</string>
     <string name="title_video_list">List</string>
