@@ -17,8 +17,8 @@ private const val TAG = "HomeViewModel"
 
 class HomeViewModel(private val repository: VideoRepository = YoutubeRepositoryImpl()) :
     ViewModel() {
-    private val _trendingVideos = MutableLiveData<List<ListItem.VideoItem>>()
-    val trendingVideos: LiveData<List<ListItem.VideoItem>> = _trendingVideos
+    private val _trendingVideos = MutableLiveData<List<ListItem.VideoItem>?>()
+    val trendingVideos: LiveData<List<ListItem.VideoItem>?> = _trendingVideos
 
     fun fetchTrendingVideos(region: String = "US") {
         viewModelScope.launch {

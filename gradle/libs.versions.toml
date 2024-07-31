@@ -13,7 +13,6 @@ glide = "4.16.0"
 fragmentKtx = "1.8.2"
 retrofit = "2.9.0"
 okhttpLogging = "4.9.0"
-lifecycle = "2.8.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
