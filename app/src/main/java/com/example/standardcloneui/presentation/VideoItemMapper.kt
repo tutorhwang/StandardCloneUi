@@ -1,6 +1,6 @@
 package com.example.standardcloneui.presentation
 
-import com.example.standardcloneui.data.model.Item
+import com.example.standardcloneui.data.model.video.Item
 
 fun List<Item>.toVideoItem(): List<ListItem.VideoItem> {
     return this.map {

@@ -1,4 +1,4 @@
-package com.example.standardcloneui.data.model
+package com.example.standardcloneui.data.model.video
 
 
 import com.google.gson.annotations.SerializedName

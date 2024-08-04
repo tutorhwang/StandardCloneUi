@@ -1,7 +1,7 @@
 package com.example.standardcloneui.data.remote
 
 import com.example.standardcloneui.BuildConfig
-import com.example.standardcloneui.data.model.VideoResponse
+import com.example.standardcloneui.data.model.video.VideoResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
