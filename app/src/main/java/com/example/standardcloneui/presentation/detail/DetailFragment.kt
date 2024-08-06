@@ -9,13 +9,12 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.example.standardcloneui.data.model.ai.Message
-import com.example.standardcloneui.data.model.ai.OpenAIRequest
-import com.example.standardcloneui.data.repository.AiRepository
 import com.example.standardcloneui.databinding.FragmentDetailBinding
 import com.example.standardcloneui.presentation.ListItem
+import com.example.standardcloneui.presentation.detail.ai.AIResultUIState
 import com.example.standardcloneui.presentation.main.MainActivity
 import com.example.standardcloneui.presentation.main.FavoriteViewModel
 import com.example.standardcloneui.presentation.main.FavoriteViewModelFactory
@@ -27,7 +26,7 @@ class DetailFragment : Fragment() {
     private val viewModel: FavoriteViewModel by activityViewModels {
         FavoriteViewModelFactory(requireContext())
     }
-    private val aiRepository: AiRepository by lazy { AiRepository() }
+    private val detailViewModel: DetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,23 +62,16 @@ class DetailFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            val request = OpenAIRequest(
-                messages = listOf(
-                    Message(
-                        "user",
-                        "제목: ${item.title}, 채널: ${item.channelTitle}, 설명: ${item.description}"
-                    ),
-                    Message(
-                        "system",
-                        "너는 단호하고 재미있는 유투브 컨텐츠 분석가야. " +
-                                "유투브 비디오 title과 채널명, 설명을 분석해서 재미있을 것 같은지 " +
-                                "추천여부 멘트를 재미있게 작성해줘."
-                    )
-                )
-            )
-            val result = aiRepository.createChatCompletion(request)
-            binding.aiDescription.text = result.choices?.get(0)?.message?.content ?: "결과 없음"
+            detailViewModel.uiState.collect { uiState ->
+                binding.aiDescription.text = when (uiState) {
+                    is AIResultUIState.Loading -> "AI 분석중........."
+                    is AIResultUIState.Success -> uiState.response.aiMessage
+                    is AIResultUIState.Error -> uiState.errorMessage
+                }
+            }
         }
+
+        detailViewModel.fetchAiAnalysisResult(item)
     }
 
     override fun onDestroyView() {
