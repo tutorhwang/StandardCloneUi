@@ -1,4 +1,4 @@
-package com.example.standardcloneui.presentation.detail.ai
+package com.example.standardcloneui.presentation.ai
 
 sealed class AIResultUIState {
     object Loading : AIResultUIState()

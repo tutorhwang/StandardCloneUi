@@ -1,4 +1,4 @@
-package com.example.standardcloneui.presentation.detail
+package com.example.standardcloneui.presentation.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,13 +6,13 @@ import com.example.standardcloneui.data.model.ai.Message
 import com.example.standardcloneui.data.model.ai.OpenAIRequest
 import com.example.standardcloneui.data.repository.AiRepository
 import com.example.standardcloneui.presentation.ListItem
-import com.example.standardcloneui.presentation.detail.ai.AIResponse
-import com.example.standardcloneui.presentation.detail.ai.AIResultUIState
+import com.example.standardcloneui.presentation.ai.AIResponse
+import com.example.standardcloneui.presentation.ai.AIResultUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class DetailViewModel(private val repository: AiRepository = AiRepository()) : ViewModel() {
+class PlayerViewModel(private val repository: AiRepository = AiRepository()) : ViewModel() {
     private val _uiState = MutableStateFlow<AIResultUIState>(AIResultUIState.Loading)
     val uiState: StateFlow<AIResultUIState> = _uiState
 
@@ -31,7 +31,6 @@ class DetailViewModel(private val repository: AiRepository = AiRepository()) : V
         }
     }
 }
-
 private fun ListItem.VideoItem.createAiRequest(): OpenAIRequest {
     return OpenAIRequest(
         messages = listOf(

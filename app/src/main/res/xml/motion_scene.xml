@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@id/top"
+        motion:constraintSetStart="@id/mini"
+        motion:duration="500">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/player_container"
+            motion:touchAnchorSide="top"
+            motion:touchRegionId="@id/player_container" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/mini">
+        <Constraint
+            android:id="@id/player_container"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            motion:layout_constraintBottom_toTopOf="@id/tab_layout"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@id/thumbnail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="@id/player_container"
+            motion:layout_constraintDimensionRatio="16:9"
+            motion:layout_constraintStart_toStartOf="@id/player_container"
+            motion:layout_constraintTop_toTopOf="@id/player_container" />
+
+        <Constraint
+            android:id="@id/title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="@id/player_container"
+            motion:layout_constraintEnd_toEndOf="@id/player_container"
+            motion:layout_constraintStart_toEndOf="@id/thumbnail"
+            motion:layout_constraintTop_toTopOf="@id/player_container" />
+
+        <Constraint
+            android:id="@id/ai_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            motion:layout_constraintBottom_toBottomOf="@id/player_container"
+            motion:layout_constraintEnd_toEndOf="@id/player_container"
+            motion:layout_constraintStart_toStartOf="@id/player_container"
+            motion:layout_constraintTop_toBottomOf="@id/title" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/top">
+        <Constraint
+            android:id="@id/player_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toTopOf="@id/tab_layout"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/thumbnail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintDimensionRatio="16:9"
+            motion:layout_constraintEnd_toEndOf="@id/player_container"
+            motion:layout_constraintStart_toStartOf="@id/player_container"
+            motion:layout_constraintTop_toTopOf="@id/player_container" />
+
+        <Constraint
+            android:id="@id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            motion:layout_constraintEnd_toEndOf="@id/player_container"
+            motion:layout_constraintStart_toStartOf="@id/player_container"
+            motion:layout_constraintTop_toBottomOf="@id/thumbnail" />
+
+        <Constraint
+            android:id="@id/ai_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="@id/player_container"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="@id/player_container"
+            motion:layout_constraintTop_toBottomOf="@id/title" />
+    </ConstraintSet>
+</MotionScene>

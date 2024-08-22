@@ -19,7 +19,7 @@ class HomeFragment : Fragment() {
     private val videoAdapter by lazy {
         VideoListAdapter { video ->
             if (video !is ListItem.VideoItem) return@VideoListAdapter
-            (activity as? MainActivity)?.showDetailFragment(video)
+            (activity as? MainActivity)?.showMiniPlayerView(video)
         }
     }
 

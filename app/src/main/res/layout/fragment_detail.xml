@@ -1,42 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:elevation="4dp"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/thumbnail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:orientation="vertical">
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_background"
+        android:clipToOutline="true"
+        android:paddingHorizontal="10dp"
+        android:scaleType="fitCenter"
+        android:src="#FFEB3B" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/detail" />
+    <TextView
+        android:id="@+id/ai_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="10dp"
+        android:textSize="20sp"
+        tools:text="test" />
 
-        <ImageView
-            android:id="@+id/picture"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/rounded_background"
-            android:clipToOutline="true"
-            android:paddingHorizontal="10dp"
-            android:scaleType="fitCenter"
-            android:src="#FFEB3B" />
-
-        <TextView
-            android:id="@+id/ai_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingHorizontal="10dp"
-            android:textSize="20sp"
-            tools:text="test" />
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
