@@ -12,7 +12,10 @@ import com.example.standardcloneui.presentation.ListItem
 import com.example.standardcloneui.databinding.ItemLayoutBinding
 import com.example.standardcloneui.databinding.ItemLayoutHeaderBinding
 
-class VideoListAdapter(private val onClick: (ListItem) -> Unit) :
+class VideoListAdapter(
+    private val onClick: (ListItem) -> Unit,
+    private val onLongClick: (ListItem) -> Unit
+) :
     ListAdapter<ListItem, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<ListItem>() {
         override fun areItemsTheSame(oldItem: ListItem, newItem: ListItem): Boolean {
             return when {
@@ -88,6 +91,10 @@ class VideoListAdapter(private val onClick: (ListItem) -> Unit) :
                 channelNameView.text = channelTitle
                 channelLogoView.setImageResource(R.drawable.haelin)
                 thumbnailView.setOnClickListener { onClick(this) }
+                thumbnailView.setOnLongClickListener {
+                    onLongClick(this)
+                    true
+                }
             }
         }
     }

@@ -34,7 +34,7 @@ class MyPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.pickButton.setOnClickListener { openGalleryForImage() }
+        binding.thumbnail.setOnClickListener { openGalleryForImage() }
         binding.recyclerView.adapter = adapter
         initViewModel()
     }
@@ -51,7 +51,7 @@ class MyPageFragment : Fragment() {
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             uri?.also { imageUri ->
-                binding.picture.setImageURI(imageUri)
+                binding.thumbnail.setImageURI(imageUri)
                 requireActivity().contentResolver.takePersistableUriPermission(
                     imageUri,
                     Intent.FLAG_GRANT_READ_URI_PERMISSION

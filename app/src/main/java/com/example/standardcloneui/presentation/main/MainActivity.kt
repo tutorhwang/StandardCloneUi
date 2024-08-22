@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<PlayerViewModel>()
 
     val tabTitles =
-        listOf(R.string.title_home, R.string.title_video_list, R.string.title_my_page)
+        listOf(R.string.title_home, R.string.title_my_page)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         Log.i(LIFECYCLE_TAG, "onCreate()")
         with(binding) {
             viewPager.adapter = ViewPagerAdapter(this@MainActivity)
+            viewPager.isUserInputEnabled = false
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = getString(tabTitles[position])
             }.attach()
